@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\Snappy\Facades\SnappyPdf;
 use TCPDF2DBarcode;
 
 class NidController extends Controller
@@ -26,5 +27,11 @@ class NidController extends Controller
         return response($barcodePngData)
             ->header('Content-Type', 'image/png');
 
+    }
+
+    public function snappyPDF()
+    {
+        $pdf = SnappyPdf::loadView('pages.snappy');
+        return $pdf->download('id_card_snappy.pdf');
     }
 }

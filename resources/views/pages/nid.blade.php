@@ -34,7 +34,8 @@
 
         .container {
             display: flex;
-            width: 2050px;
+            flex-direction: row;
+            width: 100%;
             justify-content: space-between;
             gap: 25px;
         }

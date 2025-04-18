@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use Str;
+use Illuminate\Support\Str;
 use TCPDF2DBarcode;
 
 class GDController extends Controller
@@ -63,13 +63,13 @@ class GDController extends Controller
         $name_en    = "MD EMRAN HOSSAIN";
         $f_name     = '‡gvt †njvj †nv‡mb';
         $m_name     = '‡gvQvt gwiqg †bQv';
-        $dob        = '25 Dec 1998';
-        $id_no      = '5554459734';
+        $dob        = '25 Dec 1996';
+        $id_no      = '5554459347';
         $address    = 'cybNiw`Nx, WvKNi: wZjKcyi - 5942, Av‡°jcyi,';
         $dist       = 'RqcyinvU';
         $blood_g    = 'B+';
         $issue_date = now()->format("d/m/Y");
-        $uuid = \Illuminate\Support\Str::random(98);
+        $uuid = Str::random(98);
 
         //QR/Barcode
         $data    = "<pin>{$id_no}</pin><name>{$name_en}</name><DOB>{$dob}</DOB><FP></FP><F>Right INdex</F><TYPE>A</TYPE><V>2.0</V><ds>{$uuid}</ds>";

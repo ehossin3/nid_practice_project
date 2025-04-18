@@ -7,15 +7,6 @@ use TCPDF2DBarcode;
 
 class NidController extends Controller
 {
-    public function generatePdf()
-    {
-
-        $pdf = Pdf::loadView('pages.nid')
-            ->setPaper('a4', 'portrait')
-            ->setOptions(['dpi' => 300]);
-
-        return $pdf->download('id_card_2.pdf');
-    }
 
     public function generateQRCode()
     {
@@ -29,9 +20,4 @@ class NidController extends Controller
 
     }
 
-    public function snappyPDF()
-    {
-        $pdf = SnappyPdf::loadView('pages.snappy');
-        return $pdf->download('id_card_snappy.pdf');
-    }
 }

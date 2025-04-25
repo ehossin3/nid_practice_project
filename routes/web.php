@@ -17,8 +17,8 @@ Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dash')->mid
 
 Route::get('logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
-Route::view('apply-nid', 'admin.pages.createnid')->name('nid.create')->middleware('auth');
-Route::post('nid', [NidController::class, 'createNID'])->name('nid.create');
+Route::get('apply-nid', [NidController::class, 'createNidForm'])->name('nid.create')->middleware('auth');
+Route::post('nid', [NidController::class, 'createNID'])->name('nid.store');
 
 
 Route::get('qr-code', [NidController::class, 'generateQRCode']);

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Blood;
 use App\Models\Photo;
 use App\Models\Voter;
 use Illuminate\Http\Request;
@@ -8,6 +9,12 @@ use TCPDF2DBarcode;
 
 class NidController extends Controller
 {
+
+    public function createNidForm()
+    {
+        $bloodsgropu = Blood::all();
+        return view('admin.pages.createnid', compact('bloodsgropu'));
+    }
 
     public function createNID(Request $request)
     {

@@ -27,7 +27,7 @@
         <div class="card p-4">
             <h4 class="mb-4">Add ID Information</h4>
 
-            <form method="POST" action="{{ route('nid.create') }}">
+            <form method="POST" action="{{ route('nid.store') }}">
                 @csrf
                 <div class="row g-3">
                     <!-- Name fields -->
@@ -73,14 +73,9 @@
                         <label class="form-label">Blood Group</label>
                         <select name="blood_group" class="form-select">
                             <option value="">Select</option>
-                            <option value="1">A+</option>
-                            <option value="2">A-</option>
-                            <option value="3">B+</option>
-                            <option value="4">B-</option>
-                            <option value="5">AB+</option>
-                            <option value="6">AB-</option>
-                            <option value="7">O+</option>
-                            <option value="8">O-</option>
+                            @foreach ($bloodsgropu as $b)
+                                <option value="{{ $b->id }}">{{ $b->name }}</option>
+                            @endforeach
                         </select>
                     </div>
 

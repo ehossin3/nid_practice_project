@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-light navbar-custom sticky-top">
+<nav class="navbar navbar-expand navbar-light navbar-custom">
     <div class="container-fluid">
         <span class="navbar-brand fw-bold">Welcome, {{ Auth::user()->name }}</span>
         <div class="d-flex align-items-center">

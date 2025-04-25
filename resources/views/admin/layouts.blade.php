@@ -47,6 +47,7 @@
             border-radius: 1rem;
         }
     </style>
+    @stack('styles')
 </head>
 
 <body>

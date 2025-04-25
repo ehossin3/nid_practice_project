@@ -15,9 +15,10 @@ Route::get('/create-account', [AuthController::class, 'register'])->name('regist
 Route::post('register', [AuthController::class, 'create'])->name('user.create');
 Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dash')->middleware('auth');
 
-Route::post('logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
-Route::view('apply-nid', 'pages.createnid')->name('nid.create')->middleware('auth');
+Route::view('apply-nid', 'admin.pages.createnid')->name('nid.create')->middleware('auth');
+Route::post('nid', [NidController::class, 'createNID'])->name('nid.create');
 
 
 Route::get('qr-code', [NidController::class, 'generateQRCode']);

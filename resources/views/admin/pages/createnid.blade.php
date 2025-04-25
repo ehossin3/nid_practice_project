@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts')
 
 @push('styles')
     <!-- CropperJS -->
@@ -14,9 +14,7 @@
         }
 
         .img-preview {
-            width: 100%;
-            max-height: 200px;
-            object-fit: cover;
+            width: 40%;
             margin-top: 10px;
             border: 1px solid #ddd;
             border-radius: 0.5rem;
@@ -29,45 +27,60 @@
         <div class="card p-4">
             <h4 class="mb-4">Add ID Information</h4>
 
-            <form method="POST" action="" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('nid.create') }}">
                 @csrf
                 <div class="row g-3">
+                    <!-- Name fields -->
                     <div class="col-md-6">
-                        <label class="form-label">Bangla Name</label>
-                        <input type="text" name="name_bangla" class="form-control" required>
+                        <label class="form-label">Name (বাংলা)</label>
+                        <input type="text" name="name_bangla" class="form-control">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">English Name</label>
-                        <input type="text" name="name_english" class="form-control" required>
+                        <label class="form-label">Name (English)</label>
+                        <input type="text" name="name_english" class="form-control">
+                    </div>
+
+                    <!-- Father's Name -->
+                    <div class="col-md-6">
+                        <label class="form-label">Father's Name (বাংলা)</label>
+                        <input type="text" name="fathers_name_bn" class="form-control">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Father's Name</label>
-                        <input type="text" name="fathers_name" class="form-control" required>
+                        <label class="form-label">Father's Name (English)</label>
+                        <input type="text" name="fathers_name_en" class="form-control">
+                    </div>
+
+                    <!-- Mother's Name -->
+                    <div class="col-md-6">
+                        <label class="form-label">Mother's Name (বাংলা)</label>
+                        <input type="text" name="mothers_name_bn" class="form-control">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Mother's Name</label>
-                        <input type="text" name="mothers_name" class="form-control" required>
+                        <label class="form-label">Mother's Name (English)</label>
+                        <input type="text" name="mothers_name_en" class="form-control">
                     </div>
+
                     <div class="col-md-6">
                         <label class="form-label">Date of Birth</label>
-                        <input type="date" name="date_of_birth" class="form-control" required>
+                        <input type="date" name="date_of_birth" class="form-control">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">ID Number</label>
-                        <input type="text" name="id_no" class="form-control" required>
+                        <input type="text" name="id_no" class="form-control">
                     </div>
+
                     <div class="col-md-6">
                         <label class="form-label">Blood Group</label>
                         <select name="blood_group" class="form-select">
                             <option value="">Select</option>
-                            <option>A+</option>
-                            <option>A-</option>
-                            <option>B+</option>
-                            <option>B-</option>
-                            <option>AB+</option>
-                            <option>AB-</option>
-                            <option>O+</option>
-                            <option>O-</option>
+                            <option value="1">A+</option>
+                            <option value="2">A-</option>
+                            <option value="3">B+</option>
+                            <option value="4">B-</option>
+                            <option value="5">AB+</option>
+                            <option value="6">AB-</option>
+                            <option value="7">O+</option>
+                            <option value="8">O-</option>
                         </select>
                     </div>
 
@@ -76,7 +89,7 @@
                         <label class="form-label">NID Photo</label>
                         <input type="file" id="photoInput" class="form-control" accept="image/*">
                         <input type="hidden" name="nid_photo" id="nidPhotoData">
-                        <img id="photoPreview" class="img-preview" alt="Photo Preview">
+                        <img src="{{ asset('images/user.jpg') }}" id="photoPreview" class="img-preview" alt="Photo Preview">
                     </div>
 
                     <!-- Signature Upload -->
@@ -84,7 +97,18 @@
                         <label class="form-label">Signature</label>
                         <input type="file" id="signatureInput" class="form-control" accept="image/*">
                         <input type="hidden" name="signature" id="signatureData">
-                        <img id="signaturePreview" class="img-preview" alt="Signature Preview">
+                        <img src="{{ asset('images/sig.png') }}" id="signaturePreview" class="img-preview"
+                            alt="Signature Preview">
+                    </div>
+
+                    <!-- Address and District -->
+                    <div class="col-md-6">
+                        <label class="form-label">Address</label>
+                        <textarea class="form-control" name="address" rows="3"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">District</label>
+                        <input type="text" name="district" class="form-control">
                     </div>
                 </div>
 
@@ -145,6 +169,7 @@
         });
 
         $('#cropModal').on('shown.bs.modal', function() {
+            if (cropper) cropper.destroy();
             cropper = new Cropper(document.getElementById('cropImage'), {
                 aspectRatio: selectedType === 'photo' ? 53 / 61 : 6 / 1,
                 viewMode: 1,
@@ -156,6 +181,7 @@
                 width: selectedType === 'photo' ? 212 : 150,
                 height: selectedType === 'photo' ? 242 : 25,
             });
+
             const base64 = canvas.toDataURL('image/png');
 
             if (selectedType === 'photo') {

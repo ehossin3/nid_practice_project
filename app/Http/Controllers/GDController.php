@@ -1,19 +1,22 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Voter;
 use Illuminate\Support\Str;
 use TCPDF2DBarcode;
 
 class GDController extends Controller
 {
-    public function index()
+    public function index($id)
     {
+        $voter = Voter::with(['photo', 'blood'])->first();
         header('Content-Type: image/png');
 
         //nid fonts
         $sut_f       = public_path('fonts/SutonnyMJ-Bold.ttf');
         $sut_regular = public_path('fonts/SutonnyMJ-Regular.ttf');
         $solaiman_f  = public_path('fonts/SolaimanLipi.ttf');
+        $solaiman_bf  = public_path('fonts/SolaimanLipi_Bold_10-03-12.ttf');
         $arial       = public_path('fonts/ARIAL.TTF');
         $arialB      = public_path('fonts/ARIALBD.TTF');
 
@@ -59,9 +62,9 @@ class GDController extends Controller
         );
 
         //nid info
-        $name_bn    = '‡gvt Bgivb †nv‡mb';
-        $name_en    = "MD EMRAN HOSSAIN";
-        $f_name     = '‡gvt †njvj †nv‡mb';
+        $name_bn    = $voter->name_bn;
+        $name_en    = strtoupper($voter->name_en);
+        $f_name     = $voter->fname_bn;
         $m_name     = '‡gvQvt gwiqg †bQv';
         $dob        = '25 Dec 1996';
         $id_no      = '5554459347';
@@ -97,13 +100,13 @@ class GDController extends Controller
         $text_color = imagecolorallocate($image, 0, 0, 0);
 
         //bangla name
-        imagettftext($image, 38, 0, 390, 260, $text_color, $sut_f, $name_bn);
+        imagettftext($image, 38, 0, 390, 260, $text_color, $solaiman_bf, $name_bn);
 
         //English name
         imagettftext($image, 30, 0, 390, 341, $text_color, $arial, $name_en);
 
         //Fathers name
-        imagettftext($image, 33, 0, 390, 405, $text_color, $sut_regular, $f_name);
+        imagettftext($image, 33, 0, 390, 405, $text_color, $solaiman_f, $f_name);
 
         //Mothers name
         imagettftext($image, 32, 0, 390, 472, $text_color, $sut_regular, $m_name);

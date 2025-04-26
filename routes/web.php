@@ -29,5 +29,6 @@ Route::get('/voters/{voter}', [VoterController::class, 'show'])->name('voter.sho
 Route::get('id-info', [NidController::class, 'index'])->name('id.info')->middleware('auth');
 
 
-Route::get('generate-id', [GDController::class, 'index']);
+Route::get('generate-id/{id}', [GDController::class, 'index'])->name('nid.generate');
+Route::get('/convert', [VoterController::class, 'converter']);
 

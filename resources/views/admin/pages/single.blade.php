@@ -137,10 +137,7 @@
         </div>
 
         <div class="generate-btn">
-            <form action="" method="POST">
-                @csrf
-                <button type="submit">🖨️ Generate NID</button>
-            </form>
+            <a class="btn" href="{{ route('nid.generate', $voter->id) }}" type="submit">🖨️ Generate NID</a>
         </div>
     </div>
 @endsection

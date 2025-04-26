@@ -73,7 +73,7 @@
                         <label class="form-label">Blood Group</label>
                         <select name="blood_group" class="form-select">
                             <option value="">Select</option>
-                            @foreach ($bloodsgropu as $b)
+                            @foreach ($bloodsgroup as $b)
                                 <option value="{{ $b->id }}">{{ $b->name }}</option>
                             @endforeach
                         </select>

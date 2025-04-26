@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GDController;
 use App\Http\Controllers\NidController;
+use App\Http\Controllers\VoterController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,12 +19,14 @@ Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dash')->mid
 Route::get('logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
 Route::get('apply-nid', [NidController::class, 'createNidForm'])->name('nid.create')->middleware('auth');
-Route::post('nid', [NidController::class, 'createNID'])->name('nid.store');
+Route::post('nid', [NidController::class, 'nidStore'])->name('nid.store')->middleware('auth');
+
+Route::get('/voters/{voter}', [VoterController::class, 'show'])->name('voter.show')->middleware('auth');
 
 
-Route::get('qr-code', [NidController::class, 'generateQRCode']);
 
-Route::view('id-info', 'admin.pages.idinfo')->name('id.info');
+
+Route::get('id-info', [NidController::class, 'index'])->name('id.info')->middleware('auth');
 
 
 Route::get('generate-id', [GDController::class, 'index']);

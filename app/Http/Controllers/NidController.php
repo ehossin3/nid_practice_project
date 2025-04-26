@@ -10,13 +10,19 @@ use TCPDF2DBarcode;
 class NidController extends Controller
 {
 
-    public function createNidForm()
+    public function index()
     {
-        $bloodsgropu = Blood::all();
-        return view('admin.pages.createnid', compact('bloodsgropu'));
+        $voters = Voter::with(['blood', 'photo'])->latest()->paginate(10);
+        return view('admin.pages.idinfo', compact('voters'));
     }
 
-    public function createNID(Request $request)
+    public function createNidForm()
+    {
+        $bloodsgroup = Blood::all();
+        return view('admin.pages.createnid', compact('bloodsgroup'));
+    }
+
+    public function nidStore(Request $request)
     {
         $request->validate([
             'name_bangla'     => 'required|string|max:255',
@@ -30,8 +36,8 @@ class NidController extends Controller
             'id_no'           => 'required|numeric|unique:voters,id_no',
             'address'         => 'required|string',
             'district'        => 'required|string|max:255',
-            'nid_photo'       => 'required|string', // base64 image
-            'signature'       => 'required|string', // base64 image
+            'nid_photo'       => 'required|string',
+            'signature'       => 'required|string',
         ]);
 
         // Store images
@@ -62,17 +68,6 @@ class NidController extends Controller
         return back()->with('success', 'ID Information saved successfully.');
     }
 
-    public function generateQRCode()
-    {
-        $data           = 'Name: Melton, NID:123456';
-        $barcode        = new TCPDF2DBarcode($data, 'PDF417');
-        $barcodePngData = $barcode->getBarcodePngData(10, 4, [0, 0, 0]);
-
-        // Return the barcode image as a response
-        return response($barcodePngData)
-            ->header('Content-Type', 'image/png');
-
-    }
 
     private function saveBase64Image($base64, $folder)
     {

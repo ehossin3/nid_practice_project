@@ -76,7 +76,7 @@
         <div class="voter-info">
             <div>
                 <label>নাম (বাংলা):</label>
-                <p>{{ $voter->name_bn }}</p>
+                <p class="SutonnyMJ">{{ $voter->name_bn }}</p>
             </div>
             <div>
                 <label>Name (English):</label>
@@ -85,7 +85,7 @@
 
             <div>
                 <label>পিতার নাম (বাংলা):</label>
-                <p>{{ $voter->fname_bn }}</p>
+                <p class="SutonnyMJ">{{ $voter->fname_bn }}</p>
             </div>
             <div>
                 <label>Father's Name (English):</label>
@@ -94,7 +94,7 @@
 
             <div>
                 <label>মাতার নাম (বাংলা):</label>
-                <p>{{ $voter->mname_bn }}</p>
+                <p class="SutonnyMJ">{{ $voter->mname_bn }}</p>
             </div>
             <div>
                 <label>Mother's Name (English):</label>
@@ -116,12 +116,12 @@
             </div>
             <div>
                 <label>জেলা:</label>
-                <p>{{ $voter->district }}</p>
+                <p class="SutonnyMJ">{{ $voter->district }}</p>
             </div>
 
             <div class="col-12">
                 <label>ঠিকানা:</label>
-                <p>{{ $voter->address }}</p>
+                <p class="SutonnyMJ">{{ $voter->address }}</p>
             </div>
         </div>
 

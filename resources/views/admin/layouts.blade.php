@@ -18,6 +18,16 @@
             background-color: #f8f9fa;
         }
 
+        @font-face {
+            font-family: 'SutonnyMJ';
+            src: url('/fonts/SutonnyMJ-Regular.ttf') format('truetype');
+        }
+
+
+        .SutonnyMJ {
+            font-family: 'SutonnyMJ';
+        }
+
         .sidebar {
             height: 100vh;
             background-color: #0d6efd;

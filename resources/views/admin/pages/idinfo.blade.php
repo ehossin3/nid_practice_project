@@ -1,3 +1,4 @@
+
 @extends('admin.layouts')
 @section('content')
     <h2 class="mt-5">All Voter</h2>
@@ -16,10 +17,10 @@
             @foreach ($voters as $voter)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $voter->name_bn }}</td>
+                    <td class="SutonnyMJ">{{ $voter->name_bn }}</td>
                     <td>{{ $voter->id_no }}</td>
                     <td>{{ $voter->blood->name }}</td>
-                    <td>{{ $voter->district }}</td>
+                    <td class="SutonnyMJ">{{ $voter->district }}</td>
                     <td>
                         <a href="" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
                         <a href="{{ route('voter.show', $voter->id) }}" class="btn btn-sm btn-dark"><i class="bi bi-eye"></i></a>

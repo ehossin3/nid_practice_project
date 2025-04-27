@@ -33,7 +33,7 @@
                     <!-- Name fields -->
                     <div class="col-md-6">
                         <label class="form-label">Name (বাংলা)</label>
-                        <input type="text" name="name_bangla" class="form-control">
+                        <input type="text" name="name_bangla" class="form-control SutonnyMJ">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Name (English)</label>
@@ -43,7 +43,7 @@
                     <!-- Father's Name -->
                     <div class="col-md-6">
                         <label class="form-label">Father's Name (বাংলা)</label>
-                        <input type="text" name="fathers_name_bn" class="form-control">
+                        <input type="text" name="fathers_name_bn" class="form-control SutonnyMJ">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Father's Name (English)</label>
@@ -53,7 +53,7 @@
                     <!-- Mother's Name -->
                     <div class="col-md-6">
                         <label class="form-label">Mother's Name (বাংলা)</label>
-                        <input type="text" name="mothers_name_bn" class="form-control">
+                        <input type="text" name="mothers_name_bn" class="form-control SutonnyMJ">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Mother's Name (English)</label>
@@ -99,11 +99,11 @@
                     <!-- Address and District -->
                     <div class="col-md-6">
                         <label class="form-label">Address</label>
-                        <textarea class="form-control" name="address" rows="3"></textarea>
+                        <textarea class="form-control SutonnyMJ" name="address" rows="3"></textarea>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">District</label>
-                        <input type="text" name="district" class="form-control">
+                        <input type="text" name="district" class="form-control SutonnyMJ">
                     </div>
                 </div>
 

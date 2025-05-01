@@ -22,11 +22,12 @@ return new class extends Migration
             $table->string('mname_bn');
             $table->string('mname_en');
             $table->date('dob');
-            $table->foreignIdFor(Blood::class)->unique()->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Blood::class)->constrained()->cascadeOnDelete();
             $table->bigInteger('id_no')->unique();
             $table->text('address');
             $table->string('district');
             $table->foreignIdFor(Photo::class)->unique()->constrained()->cascadeOnDelete();
+            $table->longText('uuid');
             $table->timestamps();
         });
     }

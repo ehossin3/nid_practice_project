@@ -2,16 +2,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Voter;
-use App\UnicodeToBijoyConverter;
-use Illuminate\Support\Str;
 use TCPDF2DBarcode;
+use Carbon\Carbon;
 
 class GDController extends Controller
 {
     public function index($id)
     {
         $voter = Voter::with(['photo', 'blood'])->first();
-        $converter = new UnicodeToBijoyConverter();
         header('Content-Type: image/png');
 
         //nid fonts
@@ -66,16 +64,16 @@ class GDController extends Controller
 
         //nid info
         $name_bn    = $voter->name_bn;
-        $name_en    = strtoupper($voter->name_en);
+        $name_en    = ucwords($voter->name_en);
         $f_name     = $voter->fname_bn;
         $m_name     = $voter->mname_bn;
-        $dob        = '25 Dec 1996';
+        $dob        = Carbon::parse($voter->dob)->format('d M Y');
         $id_no      = $voter->id_no;
         $address    = $voter->address;
         $dist       = $voter->district;
         $blood_g    = $voter->blood->name;
         $issue_date = now()->format("d/m/Y");
-        $uuid = Str::random(98);
+        $uuid = $voter->uuid;
 
         //QR/Barcode
         $data    = "<pin>{$id_no}</pin><name>{$name_en}</name><DOB>{$dob}</DOB><FP></FP><F>Right INdex</F><TYPE>A</TYPE><V>2.0</V><ds>{$uuid}</ds>";
@@ -106,7 +104,7 @@ class GDController extends Controller
         imagettftext($image, 38, 0, 390, 260, $text_color, $sut_f, $name_bn);
 
         //English name
-        imagettftext($image, 30, 0, 390, 341, $text_color, $arial, $name_en);
+        imagettftext($image, 28, 0, 390, 339, $text_color, $arial, $name_en);
 
         //Fathers name
         imagettftext($image, 33, 0, 390, 405, $text_color, $sut_regular, $f_name);
@@ -118,7 +116,7 @@ class GDController extends Controller
         imagettftext($image, 25, 0, 500, 534, $red_col, $arial, $dob);
 
         //ID no
-        imagettftext($image, 26, 0, 397, 591, $red_col, $arialB, $id_no);
+        imagettftext($image, 32, 0, 397, 592, $red_col, $arialB, $id_no);
 
         //Address
         imagettftext($image, 28, 0, 1330, 149, $text_color, $sut_regular, $address);

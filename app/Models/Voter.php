@@ -22,6 +22,7 @@ class Voter extends Model
         'address',
         'district',
         'photo_id',
+        'uuid'
     ];
 
     // Define relationship with Blood model

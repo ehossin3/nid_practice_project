@@ -5,7 +5,7 @@ use App\Models\Blood;
 use App\Models\Photo;
 use App\Models\Voter;
 use Illuminate\Http\Request;
-use TCPDF2DBarcode;
+use Illuminate\Support\Str;
 
 class NidController extends Controller
 {
@@ -49,6 +49,8 @@ class NidController extends Controller
             'voter_signature' => $signaturePath,
         ]);
 
+        
+
         // Store voter info
         Voter::create([
             'name_bn'  => $request->name_bangla,
@@ -63,6 +65,7 @@ class NidController extends Controller
             'address'  => $request->address,
             'district' => $request->district,
             'photo_id' => $photo->id,
+            'uuid'     => Str::random(98),
         ]);
 
         return back()->with('success', 'ID Information saved successfully.');

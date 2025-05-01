@@ -38,6 +38,11 @@
                     <div class="col-md-6">
                         <label class="form-label">Name (English)</label>
                         <input type="text" name="name_english" class="form-control">
+                        <p>
+                            
+                            <input type="checkbox" name="isCapitalLetter" id="isCapital">
+                            <span>সব বড় হাতের</span>
+                        </p>
                     </div>
 
                     <!-- Father's Name -->
@@ -166,7 +171,7 @@
         $('#cropModal').on('shown.bs.modal', function() {
             if (cropper) cropper.destroy();
             cropper = new Cropper(document.getElementById('cropImage'), {
-                aspectRatio: selectedType === 'photo' ? 53 / 61 : 6 / 1,
+                aspectRatio: selectedType === 'photo' ? 53 / 61 : 6 / 1.7,
                 viewMode: 1,
             });
         });
@@ -174,7 +179,7 @@
         $('#cropConfirm').on('click', function() {
             const canvas = cropper.getCroppedCanvas({
                 width: selectedType === 'photo' ? 212 : 150,
-                height: selectedType === 'photo' ? 242 : 25,
+                height: selectedType === 'photo' ? 242 : 35,
             });
 
             const base64 = canvas.toDataURL('image/png');

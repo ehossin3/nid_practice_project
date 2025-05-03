@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             BloodSeed::class,
-            UserSeeder::class
+            BDGeoLocationSeed::class
         ]);
     }
 }

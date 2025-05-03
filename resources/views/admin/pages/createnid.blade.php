@@ -33,45 +33,74 @@
                     <!-- Name fields -->
                     <div class="col-md-6">
                         <label class="form-label">Name (বাংলা)</label>
-                        <input type="text" name="name_bangla" class="form-control SutonnyMJ">
+                        <input type="text" name="name_bangla" value="{{ old('name_bangla') }}"
+                            class="form-control SutonnyMJ">
+                        @error('name_bangla')
+                            <em class="text-danger">{{ $message }}</em>
+                        @enderror
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Name (English)</label>
-                        <input type="text" name="name_english" class="form-control">
+                        <input type="text" name="name_english" value="{{ old('name_english') }}" class="form-control">
+                        @error('name_english')
+                            <em class="text-danger">{{ $message }}</em>
+                        @enderror
                         <p>
-                            
                             <input type="checkbox" name="isCapitalLetter" id="isCapital">
                             <span>সব বড় হাতের</span>
                         </p>
+
                     </div>
 
                     <!-- Father's Name -->
                     <div class="col-md-6">
                         <label class="form-label">Father's Name (বাংলা)</label>
-                        <input type="text" name="fathers_name_bn" class="form-control SutonnyMJ">
+                        <input type="text" name="fathers_name_bn" value="{{ old('fathers_name_bn') }}"
+                            class="form-control SutonnyMJ">
+                        @error('fathers_name_bn')
+                            <em class="text-danger">{{ $message }}</em>
+                        @enderror
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Father's Name (English)</label>
-                        <input type="text" name="fathers_name_en" class="form-control">
+                        <input type="text" name="fathers_name_en" value="{{ old('fathers_name_en') }}"
+                            class="form-control">
+                        @error('fathers_name_en')
+                            <em class="text-danger">{{ $message }}</em>
+                        @enderror
                     </div>
 
                     <!-- Mother's Name -->
                     <div class="col-md-6">
                         <label class="form-label">Mother's Name (বাংলা)</label>
-                        <input type="text" name="mothers_name_bn" class="form-control SutonnyMJ">
+                        <input type="text" name="mothers_name_bn" value="{{ old('mothers_name_bn') }}"
+                            class="form-control SutonnyMJ">
+                        @error('mothers_name_bn')
+                            <em class="text-danger">{{ $message }}</em>
+                        @enderror
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Mother's Name (English)</label>
-                        <input type="text" name="mothers_name_en" class="form-control">
+                        <input type="text" name="mothers_name_en" value="{{ old('mothers_name_en') }}"
+                            class="form-control">
+                        @error('mothers_name_en')
+                            <em class="text-danger">{{ $message }}</em>
+                        @enderror
                     </div>
 
                     <div class="col-md-6">
                         <label class="form-label">Date of Birth</label>
                         <input type="date" name="date_of_birth" class="form-control">
+                        @error('date_of_birth')
+                            <em class="text-danger">{{ $message }}</em>
+                        @enderror
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">ID Number</label>
-                        <input type="text" name="id_no" class="form-control">
+                        <input type="text" name="id_no" value="{{ old('id_no') }}" class="form-control">
+                        @error('id_no')
+                            <em class="text-danger">{{ $message }}</em>
+                        @enderror
                     </div>
 
                     <div class="col-md-6">
@@ -79,9 +108,13 @@
                         <select name="blood_group" class="form-select">
                             <option value="">Select</option>
                             @foreach ($bloodsgroup as $b)
-                                <option value="{{ $b->id }}">{{ $b->name }}</option>
+                                <option value="{{ $b->id }}" {{ old('blood_group') == $b->id ? 'selected' : '' }}>
+                                    {{ $b->name }}</option>
                             @endforeach
                         </select>
+                        @error('blood_group')
+                            <em class="text-danger">{{ $message }}</em>
+                        @enderror
                     </div>
 
                     <!-- NID Photo Upload -->
@@ -89,7 +122,11 @@
                         <label class="form-label">NID Photo</label>
                         <input type="file" id="photoInput" class="form-control" accept="image/*">
                         <input type="hidden" name="nid_photo" id="nidPhotoData">
-                        <img src="{{ asset('images/user.jpg') }}" id="photoPreview" class="img-preview" alt="Photo Preview">
+                        <img src="{{ asset('images/user.jpg') }}" id="photoPreview" class="img-preview"
+                            alt="Photo Preview">
+                        @error('nid_photo')
+                            <em class="text-danger">{{ $message }}</em>
+                        @enderror
                     </div>
 
                     <!-- Signature Upload -->
@@ -99,12 +136,19 @@
                         <input type="hidden" name="signature" id="signatureData">
                         <img src="{{ asset('images/sig.png') }}" id="signaturePreview" class="img-preview"
                             alt="Signature Preview">
+
+                        @error('signature')
+                            <em class="text-danger">{{ $message }}</em>
+                        @enderror
                     </div>
 
                     <!-- Address and District -->
                     <div class="col-md-6">
                         <label class="form-label">Address</label>
-                        <textarea class="form-control SutonnyMJ" name="address" rows="3"></textarea>
+                        <textarea class="form-control SutonnyMJ" name="address" rows="3">{{ old('address') }}</textarea>
+                        @error('address')
+                            <em class="text-danger">{{ $message }}</em>
+                        @enderror
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">District</label>
@@ -121,8 +165,8 @@
     <div class="modal fade" id="cropModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Crop Image</h5>
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Crop NID Photo</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body text-center">
